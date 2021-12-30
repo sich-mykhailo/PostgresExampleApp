@@ -69,4 +69,14 @@ public class TimeReportDayServiceImpl implements TimeReportDayService {
                 firstDate,
                 secondDate);
     }
+
+    @Override
+    public List<TimeReportDay> getAllTimeReportDaysByTimeReportIdCustom(Long id) {
+        return timeReportDayRepository.getByTimeReportIdCustom(id);
+    }
+
+    @Override
+    public List<TimeReportDay> getAllTimeReportDayByHoursCustom(Integer hour) {
+        return timeReportDayRepository.getByHoursCustom(hour);
+    }
 }

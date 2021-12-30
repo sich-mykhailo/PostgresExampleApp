@@ -59,11 +59,25 @@ public class TimeReportDayController {
     }
 
     @GetMapping("/{id}/{firstTime}/{secondTime}")
-    public List<TimeReportDayResponseDto> getAllTimeReportDaysBetweenDates(
+    public List<TimeReportDayResponseDto> getAllTimeReportDaysetweenDates(
             @PathVariable Long id,
             @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate firstTime,
             @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate secondTime) {
         return timeReportDayService.findAllBetweenDates(id, firstTime, secondTime).stream()
+                .map(timeReportDayMapper::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/custom-query/by-id/{id}")
+    public  List<TimeReportDayResponseDto> getAllByIdCustom(@PathVariable  Long id) {
+        return  timeReportDayService.getAllTimeReportDaysByTimeReportIdCustom(id).stream()
+                .map(timeReportDayMapper::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/custom-query/by-hours/{hours}")
+    public List<TimeReportDayResponseDto> getAllByHoursCustom(@PathVariable Integer hours) {
+        return  timeReportDayService.getAllTimeReportDayByHoursCustom(hours).stream()
                 .map(timeReportDayMapper::mapToDto)
                 .collect(Collectors.toList());
     }

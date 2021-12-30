@@ -7,7 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
+import org.hibernate.annotations.NamedNativeQuery;
+import org.hibernate.annotations.NamedQuery;
 
+@NamedQuery(name = "TimeReportDay.getByTimeReportIdCustom",
+            query = "from TimeReportDay tr where tr.timeReportId = :insertId")
+
+@NamedNativeQuery(name = "TimeReportDay.getByHoursCustom",
+                  query = "SELECT * FROM time_report_days WHERE hour = :insertHour",
+                 resultClass = TimeReportDay.class)
 @Data
 @Entity
 @Table(name = "time_report_days")

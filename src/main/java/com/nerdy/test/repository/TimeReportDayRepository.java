@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TimeReportDayRepository extends JpaRepository<TimeReportDay, Long> {
     @Query(value = "SELECT * "
             + "FROM time_report_days "
@@ -21,6 +23,7 @@ public interface TimeReportDayRepository extends JpaRepository<TimeReportDay, Lo
                                                   LocalDate firstDate,
                                                   LocalDate secondDate);
 
-    @Query(value = "SELECT * FROM time_reports;", nativeQuery = true)
-    List<String> getAllWithNativeQuery();
+    List<TimeReportDay> getByTimeReportIdCustom(Long insertId);
+
+    List<TimeReportDay> getByHoursCustom(Integer insertHour);
 }

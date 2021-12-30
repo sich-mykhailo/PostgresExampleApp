@@ -18,4 +18,8 @@ public interface TimeReportDayService {
     List<TimeReportDay> findAllBetweenDates(Long timeReportId,
                                             LocalDate firstDate,
                                             LocalDate secondDate);
+
+    List<TimeReportDay> getAllTimeReportDaysByTimeReportIdCustom(Long id);
+
+    List<TimeReportDay> getAllTimeReportDayByHoursCustom(Integer hour);
 }
