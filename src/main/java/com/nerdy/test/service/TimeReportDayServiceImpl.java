@@ -34,7 +34,7 @@ public class TimeReportDayServiceImpl implements TimeReportDayService {
     public void deleteByTimeReportIdAndDate(Long timeReportId, LocalDate date) {
         TimeReport timeReport = timeReportService.findById(timeReportId);
         TimeReportDay timeReportDay = timeReportDayRepository
-                .findTimeReportDayByTimeReportIdAndDate(timeReportId, date)
+                .findTimeReportDay(timeReportId, date)
                 .orElseThrow(() -> new DataProcessingException("Can't find time report day by date " + date));
         timeReport.getTimeReportDays().remove(timeReportDay);
         timeReportService.save(timeReport);
@@ -43,7 +43,7 @@ public class TimeReportDayServiceImpl implements TimeReportDayService {
 
     @Override
     public TimeReportDay findTimeReportDayByDate(Long id, LocalDate date) {
-        return timeReportDayRepository.findTimeReportDayByTimeReportIdAndDate(id, date)
+        return timeReportDayRepository.findTimeReportDay(id, date)
                 .orElseThrow(() ->
                         new DataProcessingException("Can't find time report day by date " + date));
     }
@@ -64,7 +64,7 @@ public class TimeReportDayServiceImpl implements TimeReportDayService {
     public List<TimeReportDay> findAllBetweenDates(Long timeReportId,
                                                    LocalDate firstDate,
                                                    LocalDate secondDate) {
-        return timeReportDayRepository.findTimeReportDaysByTimeReportIdAndDateBetween(
+        return timeReportDayRepository.findTimeReportDaysBetween(
                 timeReportId,
                 firstDate,
                 secondDate);

@@ -7,10 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "time_reports")
 public class TimeReport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
